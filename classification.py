@@ -176,16 +176,6 @@ def classify(random_state, x_train, y_train, x_test, y_test, folder_name, prefix
             os.mkdir(confusion_matrix_folder)
     if os.path.isdir(summary_folder) == False:
             os.mkdir(summary_folder)
-            
-    # 1- Linear
-    linear_classifier = LogisticRegression(random_state = random_state)
-    classify_sub(linear_classifier, 
-                 x_train, y_train, 
-                 x_test, y_test, 
-                 confusion_matrix_folder + prefix + '_cm_linear.csv', 
-                 summary_folder + prefix + '_summary_linear.csv',
-                 'Linear',
-                 verbose)
        
     # 2- KNN
     knn_classifier = KNeighborsClassifier()
@@ -196,57 +186,7 @@ def classify(random_state, x_train, y_train, x_test, y_test, folder_name, prefix
                  summary_folder + prefix + '_summary_knn.csv',
                  'KNN',
                  verbose)
-    
-    #3- RBF SVM
-    kernel_svm_classifier = SVC(kernel = 'rbf', random_state = random_state, gamma='scale')
-    classify_sub(kernel_svm_classifier, 
-                 x_train, y_train, 
-                 x_test, y_test, 
-                 confusion_matrix_folder + prefix + '_cm_kernel_svm.csv', 
-                 summary_folder + prefix + '_summary_kernel_svm.csv',
-                 'SVM',
-                 verbose)
-    
-    #4- Naive Bayes
-    naive_classifier = GaussianNB()
-    classify_sub(naive_classifier, 
-                 x_train, y_train, 
-                 x_test, y_test, 
-                 confusion_matrix_folder + prefix + '_cm_naive.csv', 
-                 summary_folder + prefix + '_summary_naive.csv',
-                 'Naive',
-                 verbose)
 
-    #5- Decision Tree
-    decision_tree_classifier = DecisionTreeClassifier(criterion = 'entropy', random_state = random_state)
-    classify_sub(decision_tree_classifier, 
-                 x_train, y_train, 
-                 x_test, y_test, 
-                 confusion_matrix_folder + prefix + '_cm_decision_tree.csv', 
-                 summary_folder + prefix + '_summary_decision_tree.csv',
-                 'Decision Tree',
-                 verbose)
-    
-    #6- Random Forest
-    random_forest_classifier = RandomForestClassifier(n_estimators = 10, criterion = 'entropy', random_state = random_state)
-    classify_sub(random_forest_classifier, 
-                 x_train, y_train, 
-                 x_test, y_test, 
-                 confusion_matrix_folder + prefix + '_cm_random_forest.csv', 
-                 summary_folder + prefix + '_summary_random_forest.csv',
-                 'Random Forest',
-                 verbose)
-
-    # 7- Linear SVM 
-    svm_classifier = LinearSVC(random_state = random_state)
-    classify_sub(svm_classifier, 
-                 x_train, y_train, 
-                 x_test, y_test, 
-                 confusion_matrix_folder + prefix + '_cm_svm.csv', 
-                 summary_folder + prefix + '_summary_svm.csv',
-                 'SVM',
-                 verbose)
-    
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--mode', type = int, default = 2)
